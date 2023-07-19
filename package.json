@@ -1,0 +1,27 @@
+{
+  "name": "cognito-auth-api",
+  "version": "1.0.0",
+  "description": "AWS cognito auth server with AWS SDK for JavaScript (v3)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "live": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "aek",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.370.0",
+    "amazon-cognito-identity-js": "^6.3.1",
+    "aws-sdk": "^2.1415.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "jwt-decode": "^3.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
