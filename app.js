@@ -3,14 +3,16 @@ const router = require('./routes/router')
 var cors = require('cors')
 const bodyParser = require('body-parser');
 const express = require('express')
+const swaggerSpec = require("./utils/swagger.js");
+const swaggerUi = require('swagger-ui-express');
 
-
+const port = process.env.APP_PORT || 3000;
 const app = express()
 
 
 // Error handling Middleware functions
 const errorLogger = (error, request, response, next) => {
-    request.requestTime = Date.now() 
+    request.requestTime = Date.now()
     console.log(`error:  ${error.message}`)
     next(error) // calling next middleware 
 }
@@ -27,13 +29,32 @@ const handleError = (err, req, res, next) => {
     return;
 }
 
-app.use('/api', router); 
+// swagger configs
+app.use(
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec, { explorer: true })
+);
+
+// documentation redirect page
+app.get("/", function (req, res) {
+    res.send(`<center><h2>Welcome Node.js, Express with AWS cognito <br> <a href='http://localhost:${port}/api-docs'>Go to Swagger UI </a></h2></center>`);
+})
+
+// API routes
+app.use('/api', router);
+
+// parse application/json
 app.use(bodyParser.json());
+
+// parse application/x-www-form-urlencoded
 app.use(
     bodyParser.urlencoded({
         extended: true,
     })
 );
+
+// cors config
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
@@ -51,4 +72,5 @@ app.use(invalidPathHandler)
 app.use(handleError);
 
 
-module.exports = app;
+
+module.exports = { app, port};

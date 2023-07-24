@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { query, body } = require("express-validator");
 
 const userLoginValidators = [
     body("password")
@@ -15,6 +15,14 @@ const userLoginValidators = [
     .withMessage("Username should be string")
     .isEmail().withMessage("Provide valid email")
 ];
+const refreshTokenValidators = [
+    query('token')
+    .isString().notEmpty().withMessage('Refresh Token is required'),
+    query('sub')
+    .isString().notEmpty().withMessage('Sub username is required')
+];
 
 
-module.exports = { userLoginValidators };
+
+
+module.exports = { userLoginValidators, refreshTokenValidators };
