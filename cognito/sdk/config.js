@@ -1,16 +1,17 @@
 require("dotenv").config();
 const { CognitoIdentityProviderClient } = require('@aws-sdk/client-cognito-identity-provider');
 
+
 const poolData = {
-    userPoolId: process.env.AWS_COGNITO_USER_POOL_ID, // Your user pool id here    
-    appClientId: process.env.AWS_COGNITO_CLIENT_ID, // Your client id here
-    appClientSecret: process.env.AWS_COGNITO_CLIENT_SECRET // Your client secret here
+    userPoolId: process.env.AWS_COGNITO_USER_POOL_ID, // App pool Id 
+    appClientId: process.env.AWS_COGNITO_CLIENT_ID, // The ID of the client associated with the user pool.
+    appClientSecret: process.env.AWS_COGNITO_CLIENT_SECRET // App client Secret 
 };
 
 const accessKeyMetadata = {
-    accessKeyId: process.env.AWS_ACCESS_KEY, // Your user pool id here    
-    secretAccessKey: process.env.AWS_SECRET_KEY, // Your client id here
-    region: process.env.AWS_COGNITO_REGION // Your client secret here
+    accessKeyId: process.env.AWS_ACCESS_KEY, // access key id 
+    secretAccessKey: process.env.AWS_SECRET_KEY, // secret access key
+    region: process.env.AWS_COGNITO_REGION // AWS region
 };
 
 const cognitoClient = new CognitoIdentityProviderClient({
@@ -22,6 +23,6 @@ const cognitoClient = new CognitoIdentityProviderClient({
     region: accessKeyMetadata.region,
 });
 
-module.exports = { cognitoClient, poolData };
+module.exports = { cognitoClient, poolData};
 
 

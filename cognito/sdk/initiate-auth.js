@@ -24,8 +24,6 @@ async function initiateAuth(username, password) {
     return getAuthenticationToken(cognitoUser);
 }
 
-
-
 async function refreshToken(sub, requestRefreshToken) {
 
     const command = new InitiateAuthCommand({
@@ -44,7 +42,6 @@ async function refreshToken(sub, requestRefreshToken) {
 
     return getAuthenticationToken(cognitoUser);
 }
-
 
 function getAuthenticationToken(cognitoUser) {
 
