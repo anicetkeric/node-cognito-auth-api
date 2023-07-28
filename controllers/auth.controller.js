@@ -45,8 +45,28 @@ const getTokenRefresh = async (req, res) => {
     }
 }
 
+const revokeToken = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+
+        // if there is error then return Error
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                success: false,
+                errors: errors.array(),
+            });
+        }
+
+        res.json(await cognitoAuthSdk.signOut(req.query.token));
+
+    } catch (err) {
+        console.error(`Error while signout token: `, err.message);
+        res.status(400);
+        res.json(err);
+    }
+}
 
 
 module.exports = {
-    signIn, getTokenRefresh
+    signIn, getTokenRefresh, revokeToken
 };

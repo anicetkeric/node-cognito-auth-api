@@ -76,6 +76,11 @@
  *           type: string
  *           format: password
  *           description: The user password. 
+ *         roles:
+ *           type: array
+ *           items:
+ *             type: string
+ *           description: array of roles
  * 
  *     UserConfirmSignUpRequest:
  *       type: object
@@ -119,7 +124,6 @@
  */
 
 const express = require('express');
-const { query, validationResult } = require("express-validator");
 const { refreshTokenValidators, userLoginValidators, userRegisterValidators, confirmSignUpValidators, signOutValidators } = require("../utils/validatiors");
 const users = require('../controllers/user.controller');
 const auth = require('../controllers/auth.controller');

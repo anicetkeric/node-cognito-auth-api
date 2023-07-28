@@ -53,7 +53,7 @@ async function signOut(token) {
 
     const response = await cognitoClient.send(command);
 
-    console.log(`Revoke token result : ${JSON.stringify(cognitoUser)} `);
+    console.log(`Revoke token result : ${JSON.stringify(response)} `);
     return {
         "message": "Token deleted",
         "data": response

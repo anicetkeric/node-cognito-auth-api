@@ -39,7 +39,10 @@ const userRegisterValidators = [
     .exists()
     .withMessage("phoneNumber is required")
     .isString()
-    .withMessage("phoneNumber should be string")
+    .withMessage("phoneNumber should be string"),
+    body("roles")
+    .notEmpty()
+    .isArray().withMessage('roles must be in an array.')
 ];
 
 const refreshTokenValidators = [
@@ -68,7 +71,5 @@ const confirmSignUpValidators = [
     .withMessage("Email should be string")
     .isEmail().withMessage("Provide valid email")
 ];
-
-
 
 module.exports = { userLoginValidators, refreshTokenValidators, userRegisterValidators, confirmSignUpValidators, signOutValidators};
