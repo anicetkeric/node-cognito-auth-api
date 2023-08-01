@@ -128,8 +128,6 @@ const { refreshTokenValidators, userLoginValidators, userRegisterValidators, con
 const users = require('../controllers/user.controller');
 const auth = require('../controllers/auth.controller');
 
-
-
 const router = express.Router();
 router.use(express.json());
 
@@ -208,7 +206,7 @@ router.post("/login", userLoginValidators, auth.signIn);
  *           schema:
  *               $ref: '#/components/schemas/UserSignupRequest'
  *     responses:
- *       "200":
+ *       "201":
  *         description: The output of SignUpCommand.
  *         content:
  *           application/json:
